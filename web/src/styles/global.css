@@ -34,6 +34,8 @@ body, html { margin: 0; }
 .social-link-label { display: grid; place-items: center; width: 100%; height: 100%; font-family: var(--space-mono); font-size: .55rem; text-transform: uppercase; }
 .form-status { display: none; }
 .form-status.is-visible { display: block; }
+.contact-honeypot { position: absolute !important; left: -10000px !important; width: 1px !important; height: 1px !important; overflow: hidden !important; }
+.form-button:disabled { cursor: wait; opacity: .65; }
 
 /* Inline SVGs inherit the global link line-height from the Webflow export,
    which clips the 15x15 social icons. Give them an explicit square viewport. */

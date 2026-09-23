@@ -3,12 +3,15 @@ const {privacyNotice, popup = false, email} = Astro.props as {privacyNotice: str
 ---
 <div class="form-block w-form">
   <form class:list={['form', popup && 'popup']} data-contact-form data-recipient={email}>
+    <div class="contact-honeypot" aria-hidden="true">
+      <label>Strona internetowa<input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
+    </div>
     <input class="form-field w-input" maxlength="256" name="name" placeholder="IMIĘ I NAZWISKO:" type="text" required />
     <input class="form-field w-input" maxlength="256" name="email" placeholder="MAIL:" type="email" required />
     <textarea placeholder="WIADOMOŚĆ:" maxlength="5000" name="message" class="form-field w-input" required></textarea>
     <button type="submit" class="form-button w-button">napisz do mnie</button>
     <div class:list={['effect-opacity-75', popup && 'popup']}>{privacyNotice}</div>
   </form>
-  <div class="success-message form-status" data-form-success><div>Otwieram Twoją aplikację pocztową.</div></div>
-  <div class="error-message form-status" data-form-error><div>Nie udało się otworzyć poczty. Napisz bezpośrednio na {email}.</div></div>
+  <div class="success-message form-status" data-form-success role="status" aria-live="polite"><div>Dziękuję. Wiadomość została wysłana.</div></div>
+  <div class="error-message form-status" data-form-error role="alert"><div>Nie udało się wysłać wiadomości. Spróbuj ponownie lub napisz na {email}.</div></div>
 </div>

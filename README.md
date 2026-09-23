@@ -43,4 +43,4 @@ Skrypt można uruchamiać ponownie: dokumenty mają stabilne identyfikatory, a i
 
 Build Astro jest statyczny. W środowisku staging ustaw `PUBLIC_SANITY_DATASET=staging` oraz `PUBLIC_SITE_URL` na adres podglądu. W produkcji ustaw `PUBLIC_SANITY_DATASET=production` i docelową domenę. Staging automatycznie otrzymuje `noindex,nofollow`.
 
-Formularze otwierają obecnie lokalną aplikację pocztową (`mailto:`). Nie przeniesiono publicznego webhooka Make z wersji Webflow; docelowy endpoint formularza należy wdrożyć po stronie serwera.
+Formularze wysyłają dane przez Cloudflare Pages Function pod `/api/contact`. W ustawieniach projektu Cloudflare należy dodać zaszyfrowany sekret `MAKE_WEBHOOK_URL` zawierający adres webhooka Make. Adres webhooka nie może być zapisany w kodzie ani w publicznej zmiennej `PUBLIC_*`.
