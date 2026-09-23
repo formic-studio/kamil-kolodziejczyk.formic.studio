@@ -6,6 +6,7 @@ export default defineCliConfig({
     dataset: 'staging',
   },
   deployment: {
+    appId: 'r4kg3vpgkgu8kisfjl6kjqf6',
     autoUpdates: false,
   },
 })
