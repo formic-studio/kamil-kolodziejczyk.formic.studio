@@ -22,6 +22,24 @@ body, html { margin: 0; }
 .form-status { display: none; }
 .form-status.is-visible { display: block; }
 
+/* Inline SVGs inherit the global link line-height from the Webflow export,
+   which clips the 15x15 social icons. Give them an explicit square viewport. */
+.social-link-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  overflow: visible;
+}
+
+.social-link-block > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  overflow: visible;
+}
+
 /* The Webflow version used plain text elements for these tabs. Keep the
    semantic buttons in Astro, but remove every native button decoration so the
    active state is expressed only by the text opacity, as in the design. */
