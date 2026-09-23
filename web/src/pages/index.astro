@@ -1,0 +1,33 @@
+---
+import { sanityClient } from 'sanity:client';
+
+interface SiteSettings {
+	title?: string;
+	description?: string;
+}
+
+const settings = await sanityClient.fetch<SiteSettings | null>(
+	`*[_type == "siteSettings"][0]{title, description}`,
+);
+const dataset = import.meta.env.PUBLIC_SANITY_DATASET || 'staging';
+const isProduction = dataset === 'production';
+---
+
+<html lang="pl">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="robots" content={isProduction ? 'index,follow' : 'noindex,nofollow'} />
+		<meta
+			name="description"
+			content={settings?.description || 'Kamil Kołodziejczyk — strona w trakcie migracji.'}
+		/>
+		<title>{settings?.title || 'Kamil Kołodziejczyk'}</title>
+	</head>
+	<body>
+		<main>
+			<h1>{settings?.title || 'Astro + Sanity połączone'}</h1>
+			<p>{settings?.description || `Dataset: ${dataset}`}</p>
+		</main>
+	</body>
+</html>
