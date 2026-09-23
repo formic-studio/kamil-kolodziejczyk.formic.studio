@@ -16,11 +16,15 @@ body, html { margin: 0; }
 .link-block > div:not(.nav-bg) { position: relative; z-index: 1; }
 .svg-link-top > svg {
   display: block;
+}
+.svg-link-top > svg > path {
   transition: transform .25s cubic-bezier(.25, .46, .45, .94);
+  transform-box: fill-box;
+  transform-origin: center;
   will-change: transform;
 }
 @media (hover: hover) {
-  .svg-link-top:hover > svg { transform: translateY(-4px); }
+  .svg-link-top:hover > svg > path { transform: translateY(-2px); }
 }
 .w-form-done { background-color: transparent !important; }
 .form-button { background-color: var(--base-color-neutral--white-button); background-image: linear-gradient(to right, #fff9f5 50%, transparent 50%); background-size: 200% 100%; background-position: 100% 0; transition: background-position .3s cubic-bezier(.25,.46,.45,.94), color .2s ease, border-color .4s ease; position: relative; overflow: hidden; cursor: pointer; z-index: 1; }
@@ -111,4 +115,4 @@ html { font-size: calc(var(--base) * 1rem + var(--coefficient) * 1vw); }
 @media (max-width: 360px) { :root { --font-from: 13; --font-to: 16; --vw-from: calc(319 / 100); --vw-to: calc(360 / 100); } }
 @media (max-width: 319px) { :root { --font-from: 10; --font-to: 12; --vw-from: calc(1 / 100); --vw-to: calc(319 / 100); } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } .img-hero { scale: 1; } }
-@media (prefers-reduced-motion: reduce) { .svg-link-top:hover > svg { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .svg-link-top:hover > svg > path { transform: none; } }
