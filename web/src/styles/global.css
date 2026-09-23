@@ -24,7 +24,7 @@ body, html { margin: 0; }
   will-change: transform;
 }
 @media (hover: hover) {
-  .svg-link-top:hover > svg > path { transform: translateY(-2px); }
+  .svg-link-top:hover > svg > path { transform: translateY(-1px); }
 }
 .w-form-done { background-color: transparent !important; }
 .form-button { background-color: var(--base-color-neutral--white-button); background-image: linear-gradient(to right, #fff9f5 50%, transparent 50%); background-size: 200% 100%; background-position: 100% 0; transition: background-position .3s cubic-bezier(.25,.46,.45,.94), color .2s ease, border-color .4s ease; position: relative; overflow: hidden; cursor: pointer; z-index: 1; }
