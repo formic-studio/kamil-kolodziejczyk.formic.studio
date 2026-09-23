@@ -44,33 +44,28 @@ button.slider-text {
 button.slider-text:focus:not(:focus-visible) { outline: none; }
 button.slider-text:focus-visible { outline: 1px solid currentColor; outline-offset: 4px; }
 
-/* Keep the contact modal compact and centered. The original Webflow markup
-   forced a line break in the heading; CMS text does not, so an unconstrained
-   intrinsic width made the migrated panel expand across most of the screen. */
+/* Keep the contact modal compact while preserving its original right-hand
+   position. The CMS heading has no forced line break, so the panel needs an
+   explicit width instead of relying on its intrinsic content width. */
 .section_popup {
-  justify-content: center;
-  align-items: flex-start;
-  padding: calc(var(--_sizes---padding--padding-horizontal) + 22px + var(--_sizes---font--button) + 32px)
-    var(--_sizes---padding--padding-horizontal)
-    var(--_sizes---padding--padding-horizontal);
   overflow-x: hidden;
   overflow-y: auto;
 }
 
 .section_popup .popup-block {
-  position: relative;
-  inset: auto;
-  flex: none;
-  width: min(32rem, 100%);
+  width: min(32rem, calc(100vw - var(--_sizes---padding--padding-vertical) - var(--_sizes---padding--padding-horizontal)));
   max-width: 32rem;
 }
 
 .section_popup .contact-block-popup { width: 100%; }
 .section_popup .form.popup {
   width: 100%;
+  max-width: none;
   margin-right: auto;
   margin-left: auto;
 }
+
+.section_popup .form.popup .form-field { width: 100%; }
 
 :root { --font-from: 18; --font-to: 20; --vw-from: calc(2560 / 100); --vw-to: calc(3201 / 100); --coefficient: calc((var(--font-to) - var(--font-from)) / (var(--vw-to) - var(--vw-from))); --base: calc((var(--font-from) - var(--vw-from) * var(--coefficient)) / 16); }
 html { font-size: calc(var(--base) * 1rem + var(--coefficient) * 1vw); }
