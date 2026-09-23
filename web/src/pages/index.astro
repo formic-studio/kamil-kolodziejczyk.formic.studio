@@ -1,33 +1,30 @@
 ---
-import { sanityClient } from 'sanity:client';
+import {sanityClient} from '../lib/sanity';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import HeroOffer from '../components/HeroOffer.astro';
+import Portfolio from '../components/Portfolio.astro';
+import ExperienceServices from '../components/ExperienceServices.astro';
+import TestimonialsContact from '../components/TestimonialsContact.astro';
+import Footer from '../components/Footer.astro';
+import {pageQuery, type PageData} from '../lib/content';
 
-interface SiteSettings {
-	title?: string;
-	description?: string;
-}
-
-const settings = await sanityClient.fetch<SiteSettings | null>(
-	`*[_type == "siteSettings"][0]{title, description}`,
-);
+const data = await sanityClient.fetch<PageData>(pageQuery);
+if (!data?.settings || !data?.page) throw new Error('Brak treści strony w aktywnym datasecie Sanity. Uruchom import staging.');
+data.page.portfolio = (data.page.portfolio || []).filter(Boolean);
+data.page.experience = (data.page.experience || []).filter(Boolean);
+data.page.testimonials = (data.page.testimonials || []).filter(Boolean);
 const dataset = import.meta.env.PUBLIC_SANITY_DATASET || 'staging';
-const isProduction = dataset === 'production';
 ---
-
-<html lang="pl">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="robots" content={isProduction ? 'index,follow' : 'noindex,nofollow'} />
-		<meta
-			name="description"
-			content={settings?.description || 'Kamil Kołodziejczyk — strona w trakcie migracji.'}
-		/>
-		<title>{settings?.title || 'Kamil Kołodziejczyk'}</title>
-	</head>
-	<body>
-		<main>
-			<h1>{settings?.title || 'Astro + Sanity połączone'}</h1>
-			<p>{settings?.description || `Dataset: ${dataset}`}</p>
-		</main>
-	</body>
-</html>
+<BaseLayout settings={data.settings} isProduction={dataset === 'production'}>
+  <div class="page-wrapper">
+    <Navigation />
+    <main class="main-wrapper">
+      <HeroOffer page={data.page} />
+      <Portfolio items={data.page.portfolio} />
+      <ExperienceServices page={data.page} />
+      <TestimonialsContact page={data.page} settings={data.settings} />
+    </main>
+    <Footer settings={data.settings} people={data.page.servicePeople} />
+  </div>
+</BaseLayout>

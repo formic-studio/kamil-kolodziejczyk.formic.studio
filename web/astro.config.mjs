@@ -7,11 +7,12 @@ const env = loadEnv(process.env.NODE_ENV || 'development', process.cwd(), '');
 
 // https://astro.build/config
 export default defineConfig({
+	site: env.PUBLIC_SITE_URL || 'https://kamil-kolodziejczyk.formic.studio',
 	integrations: [
 		sanity({
 			projectId: env.PUBLIC_SANITY_PROJECT_ID || 'qus38rw8',
 			dataset: env.PUBLIC_SANITY_DATASET || 'staging',
-			apiVersion: env.PUBLIC_SANITY_API_VERSION || '2026-09-23',
+			apiVersion: env.PUBLIC_SANITY_API_VERSION || '2025-08-15',
 			useCdn: false,
 		}),
 	],

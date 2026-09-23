@@ -1,0 +1,36 @@
+---
+import type {HomePage, SiteSettings} from '../lib/content';
+import ContactForm from './ContactForm.astro';
+const {page, settings} = Astro.props as {page: HomePage; settings: SiteSettings};
+---
+<section class="section_testimonials">
+  <div class="padding-global padding-section-medium"><div class="container-large"><div class="flex-vertical-center-top gap-6-3">
+    <div class="heading-style-h4 font-align-center">Low-code developer, od którego<br />nie usłyszysz „nie da się”</div>
+    <div class="slider-testimonials"><div class="testimonial-wrapper">
+      {page.testimonials.map((item) => <div class="testimonial-slide"><div class="flex-vertical-center-top gap-2">
+        <div class="text-caption font-family-tertiary font-uppercase">{item.company}</div>
+        <div class="position-relative"><div class="black-block"></div><div class="heading-style-h3 font-style-center position-relative preserve-lines">{item.author.replace(' ', '\n')}</div></div>
+        <p class="font-family-secendary font-align-center font-color-neutral-dark">{item.quote}</p>
+        <div class="flex-vertical-center-top gap-1-5"><div class="rectangle"></div><div class="text-caption text-style-uppercase font-align-center">{item.relationship}</div></div>
+      </div><div class="rectangle-wrapper"><div class="rectangle-small bg-color-white testimonials"></div><div class="rectangle-small bg-color-white secendary testimonials"></div><div class="rectangle-small bg-color-white tertiary testimonials"></div></div></div>)}
+    </div><div class="testimonial-pagination"><button type="button" aria-label="Poprzednia rekomendacja" class="testimonial-arrow testimonial-arrow--prev">‹</button><button type="button" aria-label="Następna rekomendacja" class="testimonial-arrow testimonial-arrow--next is-active">›</button></div></div>
+    <div class="flex-vertical-center-top gap-4"><div class="rectangle"></div><div class="text-caption text-style-uppercase font-align-center">Development,<br />integracje i wdrożenia</div></div>
+  </div></div></div>
+</section>
+
+<section id="section_contact" class="section_contact">
+  <div class="padding-global padding-section-big"><div class="container-large"></div><div class="contact-block">
+    <div class="flex-vertical-center-top gap-2-5"><div class="heading-style-h4 font-align-center">{page.contactHeading}</div><div class="flex-vertical-center-top"><div class="heading-style-h2">Your idea</div><div class="heading-style-h2 bg-color-light-orange">made to live</div></div></div>
+    <ContactForm privacyNotice={page.privacyNotice} email={settings.email} />
+    <div class="rectangle-wrapper"><div class="rectangle-small bg-color-white section-contact"></div><div class="rectangle-small bg-color-white secendary section-contact"></div><div class="rectangle-small bg-color-white tertiary section-contact"></div></div>
+  </div></div>
+</section>
+
+<div data-popup="section" class="section_popup" aria-hidden="true">
+  <div data-popup="close" class="link-block-wrapper close"><button type="button" animation-data="button" class="button-block close"><span class="button-bg-orange"></span><span class="text-button">zamknij</span></button></div>
+  <div data-popup="block" class="popup-block"><div class="contact-block-popup">
+    <div class="flex-vertical-center-top gap-2-5"><div class="pop-up-text">{page.contactHeading}</div><div class="flex-vertical-center-top"><div class="popup-hero preserve-lines">{page.contactClaim}</div></div></div>
+    <ContactForm privacyNotice={page.privacyNotice} email={settings.email} popup />
+    <div class="rectangle-wrapper"><div class="rectangle-small bg-color-white section-contact pop-up-size"></div><div class="rectangle-small bg-color-white secendary section-contact pop-up-size"></div><div class="rectangle-small bg-color-white tertiary section-contact pop-up-size"></div></div>
+  </div></div>
+</div>

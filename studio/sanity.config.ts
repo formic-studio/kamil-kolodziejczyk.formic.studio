@@ -5,7 +5,26 @@ import {schemaTypes} from './schemaTypes'
 
 const sharedConfig = {
   projectId: 'qus38rw8',
-  plugins: [structureTool(), visionTool()],
+  plugins: [
+    structureTool({
+      structure: (S) =>
+        S.list()
+          .title('Treści')
+          .items([
+            S.listItem()
+              .title('Ustawienia strony')
+              .child(S.document().schemaType('siteSettings').documentId('siteSettings')),
+            S.listItem()
+              .title('Strona główna')
+              .child(S.document().schemaType('homePage').documentId('homePage')),
+            S.divider(),
+            ...S.documentTypeListItems().filter(
+              (item) => !['siteSettings', 'homePage'].includes(item.getId() || ''),
+            ),
+          ]),
+    }),
+    visionTool(),
+  ],
   schema: {types: schemaTypes},
 }
 

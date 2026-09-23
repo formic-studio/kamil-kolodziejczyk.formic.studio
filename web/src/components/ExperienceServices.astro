@@ -1,0 +1,36 @@
+---
+import type {HomePage} from '../lib/content';
+import SocialLinks from './SocialLinks.astro';
+const {page} = Astro.props as {page: HomePage};
+---
+<section id="section_exp" class="section_competencies">
+  <div class="padding-global padding-section-medium"><div class="container-large"><div class="grid-12 padding-bottom-24">
+    <div id="w-node-f6f9316e-536c-8247-6259-6466aef0e8db-bb3bdf83" class="gap-large"><div class="text-caption text-style-uppercase preserve-lines">{page.aboutLabel}</div><div text-animation="true" class="heading-style-h4 preserve-lines">{page.aboutText}</div></div>
+    <div id="w-node-_67d3d25d-d3f6-e0b0-6f5a-05cdcd91c2d1-bb3bdf83" data-slider-group="competencies" class="gap-large">
+      <div class="flex-horizontal-left-center gap-normal"><button type="button" animation-competencies="1" class="slider-text">Kompetencje</button><div class="heading-style-h3">/</div><button type="button" animation-competencies="2" class="slider-text font-opacity-25">Doświadczenie</button></div>
+      <div class="slider-wrapper"><div class="slider-inner">
+        <div animation-competencies="1" class="slider-block">
+          {page.capabilityGroups.map((group) => <div class="flex-vertical-left gap-small width-100"><div class="font-size-link">{group.title}</div><div class="list-wrapper"><ul role="list" class="list">
+            {group.items.map((item, index) => <li class="list-item"><div class="list-block"><div class="list-number-wrapper"><div class="mobile-display-none">{String(index + 1).padStart(2, '0')}</div><div>{item.title}</div></div><div class="font-align-right font-align-left-mobile">{item.description}</div></div><div class="divider bg-color-lighter"></div></li>)}
+          </ul></div></div>)}
+        </div>
+        <div animation-competencies="2" class="slider-block"><div class="flex-vertical-left gap-small">
+          {page.experience.map((item) => <><div class="font-size-link">{item.company}</div><div class="list-wrapper"><ul role="list" class="list"><li class="list-item"><div class="list-block"><div class="font-align-right font-align-left-mobile grow-no">{item.period}</div><div class="list-flex"><div class="font-align-right font-align-left-mobile"><strong>{item.role}</strong></div><div class="font-align-right font-align-left-mobile">{item.description}</div></div></div><div class="divider bg-color-lighter"></div></li></ul></div></>)}
+        </div></div>
+      </div></div>
+    </div>
+  </div></div></div>
+</section>
+
+<section id="section_services" data-slider-group="services" class="section_services">
+  <div class="padding-global padding-section-medium"><div class="container-large">
+    <div class="grid-12"><div id="w-node-_3131af0e-0dc1-a542-11e6-8c1fe5aa4f65-bb3bdf83" class="gap-largest">
+      <div class="flex-horizontal-left-center gap-normal">{page.servicePeople.map((person, index) => <><button type="button" slider-btn={index} class:list={['slider-text', index > 0 && 'font-opacity-25', index > 0 && 'right']}>{person.name}</button>{index === 0 && <div class="heading-style-h3">/</div>}</>)}</div>
+      <div class="slider-wrapper"><div class="slider-inner">{page.servicePeople.map((person) => <div class="slider-block-services">
+        {person.services.map((service, index) => <div class="flex-vertical-left gap-0-875"><div class="heading-style-h4">{service.title}</div><div class="divider"></div><div class="text-caption font-family-secendary">{service.description}</div>{index === person.services.length - 1 && <div class="margin-top-32"><SocialLinks links={person.socialLinks} dark /></div>}</div>)}
+      </div>)}</div></div>
+    </div></div>
+    <div class="block-text-big-block">{page.servicePeople.map((person, index) => <div text-animation="true" slider-connect={index} class:list={['text-services', index > 0 && 'font-color-opacity']}>{person.headline}</div>)}</div>
+    <div class="rectangle-wrapper mobile-display-none"><div class="rectangle-small bg-color-white"></div><div class="rectangle-small bg-color-white secendary"></div></div>
+  </div></div>
+</section>

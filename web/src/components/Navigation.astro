@@ -1,0 +1,14 @@
+<div class="nav_fixed">
+  <nav class="navbar" aria-label="Główna nawigacja">
+    <div class="nav-block">
+      {[
+        ['1. Cześć', '#section_hero', ''], ['2. Co oferuję', '#section_offer', 'mobile-display-none'],
+        ['3. Portfolio', '#section_portfolio', 'mobile-display-none'], ['4. Doświadczenie', '#section_exp', 'mobile-display-none'],
+        ['5. Skontaktuj się', '#section_contact', 'mobile-display-none'], ['2. Kontakt', '#section_contact', 'desktop-display-none'],
+      ].map(([label, href, className]) => <a href={href} class:list={['link-block', className, 'w-inline-block']}><div>{label}</div><div class="nav-bg"></div></a>)}
+      <a aria-label="Wróć do początku" href="#section_hero" class="svg-link-top w-inline-block">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 21 21" fill="none"><rect x=".5" y=".5" width="20" height="20" rx="1.5" stroke="currentColor"/><path d="m15.132 12.816-4.632-4.632-4.632 4.632" stroke="currentColor" stroke-width="2"/></svg>
+      </a>
+    </div>
+  </nav>
+</div>

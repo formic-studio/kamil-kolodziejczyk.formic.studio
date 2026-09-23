@@ -1,0 +1,7 @@
+---
+import type {SocialLink} from '../lib/content';
+const {links = [], dark = false} = Astro.props as {links?: SocialLink[]; dark?: boolean};
+---
+<div class="socialmedia-wrapper">
+  {links.map((link) => <a aria-label={`Przejdź do ${link.label}`} href={link.url} target="_blank" rel="noreferrer" class:list={['social-link-block','w-inline-block', dark && 'hover-color-black']}><span class="social-link-label">{link.label.slice(0, 2)}</span></a>)}
+</div>

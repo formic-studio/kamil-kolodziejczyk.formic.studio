@@ -1,0 +1,39 @@
+---
+import '../styles/legacy/normalize.css';
+import '../styles/legacy/webflow.css';
+import '../styles/legacy/site.css';
+import '../styles/global.css';
+import type {SiteSettings} from '../lib/content';
+import {imageUrl} from '../lib/content';
+
+interface Props { settings: SiteSettings; isProduction: boolean }
+const {settings, isProduction} = Astro.props;
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefined;
+---
+<!doctype html>
+<html lang="pl-PL">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={settings.description} />
+    <meta name="robots" content={isProduction ? 'index,follow' : 'noindex,nofollow'} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={settings.title} />
+    <meta property="og:description" content={settings.description} />
+    <meta property="og:image" content={imageUrl(settings.ogImage)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={settings.title} />
+    <meta name="twitter:description" content={settings.description} />
+    <meta name="twitter:image" content={imageUrl(settings.ogImage)} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <link rel="icon" href="/images/favicon.png" />
+    <link rel="apple-touch-icon" href="/images/webclip.png" />
+    <title>{settings.title}</title>
+  </head>
+  <body class="body">
+    <slot />
+    <script>
+      import '../scripts/main';
+    </script>
+  </body>
+</html>

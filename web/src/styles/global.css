@@ -1,0 +1,37 @@
+html { scroll-behavior: auto; }
+body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+*, *::before, *::after { box-sizing: border-box; }
+body, html { margin: 0; }
+*[tabindex]:focus-visible, input[type="file"]:focus-visible { outline: .125rem solid #4d65ff; outline-offset: .125rem; }
+.container-medium, .container-small, .container-large { margin-right: auto !important; margin-left: auto !important; }
+.hide { display: none !important; }
+.img-hero { scale: 2; will-change: transform, filter; backface-visibility: hidden; transform: translateZ(0); }
+[animation-rectangle] { will-change: transform, opacity; backface-visibility: hidden; }
+[animation-data="text-hero"], [animation-data="button"], [animation-data="caption"] { will-change: transform, opacity, filter; }
+.slider-block .font-size-link, .slider-block .list-block, .slider-block .divider,
+.slider-block-services .heading-style-h4, .slider-block-services .text-caption, .slider-block-services .divider { opacity: 0; }
+.slider-block .divider, .slider-block-services .divider { transform: scaleX(0); transform-origin: left; }
+.slider-inner { transition: transform .6s cubic-bezier(.77, 0, .18, 1); }
+.link-block > div:not(.nav-bg) { position: relative; z-index: 1; }
+.w-form-done { background-color: transparent !important; }
+.form-button { background-color: var(--base-color-neutral--white-button); background-image: linear-gradient(to right, #fff9f5 50%, transparent 50%); background-size: 200% 100%; background-position: 100% 0; transition: background-position .3s cubic-bezier(.25,.46,.45,.94), color .2s ease, border-color .4s ease; position: relative; overflow: hidden; cursor: pointer; z-index: 1; }
+.form-button:hover { background-position: 0 0; color: #e82f12; border-color: #fff9f5; }
+.form-field { background-image: linear-gradient(var(--background-color--bacground-span), var(--background-color--bacground-span)); background-repeat: no-repeat; background-position: left center; background-size: 0 100%; }
+.preserve-lines { white-space: pre-line; }
+.social-link-label { display: grid; place-items: center; width: 100%; height: 100%; font-family: var(--space-mono); font-size: .55rem; text-transform: uppercase; }
+.form-status { display: none; }
+.form-status.is-visible { display: block; }
+
+:root { --font-from: 18; --font-to: 20; --vw-from: calc(2560 / 100); --vw-to: calc(3201 / 100); --coefficient: calc((var(--font-to) - var(--font-from)) / (var(--vw-to) - var(--vw-from))); --base: calc((var(--font-from) - var(--vw-from) * var(--coefficient)) / 16); }
+html { font-size: calc(var(--base) * 1rem + var(--coefficient) * 1vw); }
+@media (max-width: 2560px) { :root { --font-from: 16; --font-to: 18; --vw-from: calc(1919 / 100); --vw-to: calc(2560 / 100); } }
+@media (max-width: 1919px) { :root { --font-from: 16; --font-to: 16; --vw-from: calc(1440 / 100); --vw-to: calc(1919 / 100); } }
+@media (max-width: 1440px) { :root { --font-from: 13; --font-to: 16; --vw-from: calc(1023 / 100); --vw-to: calc(1440 / 100); } }
+@media (max-width: 1023px) { :root { --font-from: 14; --font-to: 16; --vw-from: calc(768 / 100); --vw-to: calc(1023 / 100); } }
+@media (max-width: 991px) { .hide, .hide-tablet { display: none !important; } }
+@media (max-width: 768px) { :root { --font-from: 14; --font-to: 16; --vw-from: calc(479 / 100); --vw-to: calc(768 / 100); } }
+@media (max-width: 767px) { .hide-mobile-landscape { display: none !important; } }
+@media (max-width: 479px) { :root { --font-from: 16; --font-to: 16; --vw-from: calc(360 / 100); --vw-to: calc(479 / 100); } .hide-mobile { display: none !important; } }
+@media (max-width: 360px) { :root { --font-from: 13; --font-to: 16; --vw-from: calc(319 / 100); --vw-to: calc(360 / 100); } }
+@media (max-width: 319px) { :root { --font-from: 10; --font-to: 12; --vw-from: calc(1 / 100); --vw-to: calc(319 / 100); } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } .img-hero { scale: 1; } }

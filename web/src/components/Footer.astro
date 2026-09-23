@@ -1,0 +1,21 @@
+---
+import type {ServicePerson, SiteSettings} from '../lib/content';
+import SocialLinks from './SocialLinks.astro';
+const {settings, people = []} = Astro.props as {settings: SiteSettings; people?: ServicePerson[]};
+const phoneHref = settings.phone.replace(/\s/g, '');
+---
+<footer class="section_footer">
+  <div class="padding-global padding-section-small"><div class="container-large"><div class="footer-wrapper">
+    <div class="flex-vertical-center-top gap-5">
+      <div text-animation="true" class="heading-style-h3 text-align-center">Kamil Kołodziejczyk<br />low–code, it brand support, branding</div>
+      <div class="flex-vertical-center-top gap-0-75"><div class="block-footer-bg"><a href={`mailto:${settings.email}`} class="w-inline-block"><div class="heading-style-h2">{settings.email}</div></a></div><a href={`tel:${phoneHref}`} class="heading-style-h2 font-color-custom">{settings.phone}</a></div>
+    </div>
+    <div class="flex-vertical-left gap-225"><div class="grid-12">
+      <svg id="w-node-ea1881a7-478d-49a3-c4b4-3bc9a990dfda-bb3bdf83" xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 300 114" fill="none" class="logo-svg"><path d="M300 113.892V90.995c0-11.521-11.927-26.718-26.638-26.718h-65.801c-4.286 0-6.101-1.254-6.101-5.001 0-4.306 1.815-5.103 6.101-5.103h34.761c4.935 0 7.971-1.332 11.797-3.774L300 15.53V0h-44.809l-48.552 37.459h-7.559V0h-96.693L59.035 37.459h-6.906V0H0v113.9h52.129V84.837h26.4c8.177 0 14.806 5.191 14.806 11.595V113.9h105.755V84.837h28.522c8.178 0 13.058 5.191 13.058 11.595v17.46H300ZM146.951 60.368l-.037 3.907v26.224c0 1.688-.242 5.47-4.845 5.47-4.167 0-5.087-3.606-5.087-5.341 0-11.318-7.809-26.355-22.262-26.355H60.612c-3.341 0-6.101-.906-6.101-5.001 0-4.724 2.533-5.103 6.101-5.103h33.704c4.748 0 9.335-1.34 12.922-3.774l34.696-33.435c1.446-1.043 5.017-.24 5.017-.654v44.062Z" fill="currentColor"/></svg>
+      <div id="w-node-_909b806e-85fb-be83-0efb-c6a830c95132-bb3bdf83" class="flex-vertical-left gap-1-5"><div class="text-body-big">Pomożemy Ci kompleksowo</div>
+        <div class="grid-8-footer font-family-teriary"><div>→</div><div id="w-node-_86d64064-3683-f4d1-a39a-da486834bef2-bb3bdf83">{people[0]?.name || 'kamil kołodziejczyk'}</div><div id="w-node-_1ac22e80-0982-d3b6-1f3e-15b4372a1704-bb3bdf83" class="flex-horizontal-space-beetwen"><div class="mobile-center">wdrażanie stron, integracje, marketing automation</div><SocialLinks links={people[0]?.socialLinks || settings.socialLinks} /></div></div>
+        <div class="grid-8-footer font-family-teriary"><div>→</div><div id="w-node-_857f7c93-344d-af3b-7400-2b48db37e910-bb3bdf83">{people[1]?.name || 'kinga bożkiewicz'}</div><div id="w-node-_0c19eb3b-179e-8236-35a1-e757d822c202-bb3bdf83" class="flex-horizontal-space-beetwen"><div class="mobile-center">projektowanie stron, strategii i identyfikacji wizualnych, fotografia</div><SocialLinks links={people[1]?.socialLinks} /></div></div>
+      </div>
+    </div><div class="grid-footer"><div id="w-node-e8c5fda9-fab3-ef44-687d-6f40824caf4d-bb3bdf83" class="text-caption font-family-tertiary">made by formic</div><div id="w-node-_71c8b103-6fd7-e785-1484-305b438282f9-bb3bdf83" class="text-caption font-family-tertiary">2026</div><div id="w-node-f5ceed86-5810-012c-b754-dcd5b0a90a79-bb3bdf83" class="text-caption font-family-tertiary justify-right">your idea made to live</div></div></div>
+  </div></div></div>
+</footer>

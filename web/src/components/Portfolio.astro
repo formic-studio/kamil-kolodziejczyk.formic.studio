@@ -1,0 +1,19 @@
+---
+import type {PortfolioItem} from '../lib/content';
+import {imageUrl} from '../lib/content';
+const {items} = Astro.props as {items: PortfolioItem[]};
+---
+<section id="section_portfolio" class="section_portfolio">
+  <div class="padding-global padding-section-0"><div class="container-large no-max-width"><div class="portfolio-wrapper">
+    {items.map((item, index) => <a data-animation={index === 0 ? '' : 'true'} href={item.url} target="_blank" rel="noreferrer" class="portfolio-block w-inline-block">
+      <img src={imageUrl(item.image, 1440)} srcset={`${imageUrl(item.image, 500)} 500w, ${imageUrl(item.image, 800)} 800w, ${imageUrl(item.image, 1080)} 1080w, ${imageUrl(item.image, 1440)} 1440w`} sizes="(max-width: 1440px) 100vw, 1440px" loading="lazy" alt={item.image.alt || `Projekt ${item.title}`} class="img-portfolio" />
+      <div class="bg-black"></div>
+      <div class="caption-wrapper">{item.tags.map((tag) => <div class="portfolio-caption-block"><div class="text-block-2">{tag}</div></div>)}</div>
+      <div class="flex-vertical-center-top gap-3">
+        <div class="block-portfolio-text-wrapper"><div class="display-none"></div><div class="block-bg-wrapper"><div>{item.title}</div><div class="block-bg-orange"></div></div></div>
+        <div data-animation="text" class="flex-vertical-center-top gap-1-125"><div class="heading-style-h3">klient: {item.client}</div><div class="text-caption text-style-uppercase">branża: {item.industry}</div></div>
+      </div>
+      <div class="rectangle-wrapper portfolio"><div class="rectangle-small bg-color-white portfolio"></div><div class="rectangle-small bg-color-white portfolio"></div></div>
+    </a>)}
+  </div><div class="mobile-scroll-paggination"><div class="paggination active"></div><div class="paggination"></div></div></div></div>
+</section>

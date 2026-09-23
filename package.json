@@ -9,10 +9,11 @@
     "dev:web": "npm run dev --workspace web",
     "dev:studio": "npm run dev --workspace studio",
     "build": "npm run build --workspace web",
-    "build:studio": "npm run build --workspace studio"
+    "build:studio": "npm run build --workspace studio",
+    "deploy:studio": "npm run deploy --workspace studio",
+    "import:staging": "cd studio && sanity exec scripts/importCurrentContent.mjs --with-user-token"
   },
   "engines": {
     "node": ">=22.12.0"
   }
 }
-
