@@ -10,7 +10,12 @@ export function initHero(lenis: Lenis | null, onReady: () => void) {
   const nav = document.querySelector('.nav_fixed');
   const rectangles = gsap.utils.toArray<HTMLElement>('[animation-rectangle]').sort((a, b) => Number(a.getAttribute('animation-rectangle')) - Number(b.getAttribute('animation-rectangle')));
 
-  if (reducedMotion()) { gsap.set([heroImg, text, button, caption, nav, rectangles], {clearProps: 'all'}); onReady(); return; }
+  if (reducedMotion()) {
+    const targets = [heroImg, text, button, caption, nav, ...rectangles].filter(Boolean);
+    gsap.set(targets, {clearProps: 'all'});
+    onReady();
+    return;
+  }
   gsap.set(nav, {y: '6rem', opacity: 0});
   gsap.set(rectangles, {opacity: 0, scale: mobile ? 1 : .5, transformOrigin: 'center'});
   gsap.set(text, {opacity: 0, filter: mobile ? 'none' : 'blur(5px)'});
