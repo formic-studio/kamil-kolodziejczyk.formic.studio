@@ -43,4 +43,4 @@ Skrypt można uruchamiać ponownie: dokumenty mają stabilne identyfikatory, a i
 
 Build Astro jest statyczny. W środowisku staging ustaw `PUBLIC_SANITY_DATASET=staging` oraz `PUBLIC_SITE_URL` na adres podglądu. W produkcji ustaw `PUBLIC_SANITY_DATASET=production` i docelową domenę. Staging automatycznie otrzymuje `noindex,nofollow`.
 
-Formularze wysyłają dane przez Cloudflare Pages Function pod `/api/contact`. W ustawieniach projektu Cloudflare należy dodać zaszyfrowany sekret `MAKE_WEBHOOK_URL` zawierający adres webhooka Make. Adres webhooka nie może być zapisany w kodzie ani w publicznej zmiennej `PUBLIC_*`.
+Formularze wysyłają dane przez Cloudflare Pages Function w trybie advanced (`_worker.js`) pod `/api/contact`. W ustawieniach projektu Cloudflare należy dodać zaszyfrowany sekret `MAKE_WEBHOOK_URL` zawierający adres webhooka Make. Adres webhooka nie może być zapisany w kodzie ani w publicznej zmiennej `PUBLIC_*`.

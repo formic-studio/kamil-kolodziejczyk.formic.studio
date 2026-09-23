@@ -1,15 +1,4 @@
-interface Env {
-  MAKE_WEBHOOK_URL?: string;
-}
-
-interface ContactPayload {
-  name?: unknown;
-  email?: unknown;
-  message?: unknown;
-  website?: unknown;
-}
-
-const json = (body: Record<string, unknown>, status = 200) => new Response(JSON.stringify(body), {
+const json = (body, status = 200) => new Response(JSON.stringify(body), {
   status,
   headers: {
     'Content-Type': 'application/json; charset=utf-8',
@@ -19,7 +8,7 @@ const json = (body: Record<string, unknown>, status = 200) => new Response(JSON.
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export const onRequest = async ({request, env}: {request: Request; env: Env}) => {
+async function handleContact(request, env) {
   if (request.method !== 'POST') {
     return json({ok: false, error: 'Method not allowed'}, 405);
   }
@@ -29,7 +18,7 @@ export const onRequest = async ({request, env}: {request: Request; env: Env}) =>
     return json({ok: false, error: 'Payload too large'}, 413);
   }
 
-  let payload: ContactPayload;
+  let payload;
   try {
     payload = await request.json();
   } catch {
@@ -80,4 +69,12 @@ export const onRequest = async ({request, env}: {request: Request; env: Env}) =>
     console.error('Contact form delivery failed', error);
     return json({ok: false, error: 'Delivery failed'}, 502);
   }
+}
+
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+    if (url.pathname === '/api/contact') return handleContact(request, env);
+    return env.ASSETS.fetch(request);
+  },
 };
