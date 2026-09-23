@@ -116,3 +116,6 @@ html { font-size: calc(var(--base) * 1rem + var(--coefficient) * 1vw); }
 @media (max-width: 319px) { :root { --font-from: 10; --font-to: 12; --vw-from: calc(1 / 100); --vw-to: calc(319 / 100); } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } .img-hero { scale: 1; } }
 @media (prefers-reduced-motion: reduce) { .svg-link-top:hover > svg > path { transform: none; } }
+.button-block.hero-cta {
+  background-color: var(--base-color-neutral--neutral);
+}
