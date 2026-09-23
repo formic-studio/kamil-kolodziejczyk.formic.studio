@@ -8,8 +8,9 @@ body, html { margin: 0; }
 .img-hero { scale: 2; will-change: transform, filter; backface-visibility: hidden; transform: translateZ(0); }
 [animation-rectangle] { will-change: transform, opacity; backface-visibility: hidden; }
 [animation-data="text-hero"], [animation-data="button"], [animation-data="caption"] { will-change: transform, opacity, filter; }
-.slider-block .font-size-link, .slider-block .list-block, .slider-block .divider,
-.slider-block-services .heading-style-h4, .slider-block-services .text-caption, .slider-block-services .divider { opacity: 0; }
+.slider-block .font-size-link, .slider-block .list-block, .slider-block .divider, .slider-block .social-link-block,
+.slider-block-services .heading-style-h4, .slider-block-services .text-caption, .slider-block-services .divider,
+.slider-block-services .social-link-block { opacity: 0; }
 .slider-block .divider, .slider-block-services .divider { transform: scaleX(0); transform-origin: left; }
 .slider-inner { transition: transform .6s cubic-bezier(.77, 0, .18, 1); }
 .link-block > div:not(.nav-bg) { position: relative; z-index: 1; }
