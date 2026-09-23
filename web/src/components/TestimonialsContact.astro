@@ -13,7 +13,18 @@ const {page, settings} = Astro.props as {page: HomePage; settings: SiteSettings}
         <p class="font-family-secendary font-align-center font-color-neutral-dark">{item.quote}</p>
         <div class="flex-vertical-center-top gap-1-5"><div class="rectangle"></div><div class="text-caption text-style-uppercase font-align-center">{item.relationship}</div></div>
       </div><div class="rectangle-wrapper"><div class="rectangle-small bg-color-white testimonials"></div><div class="rectangle-small bg-color-white secendary testimonials"></div><div class="rectangle-small bg-color-white tertiary testimonials"></div></div></div>)}
-    </div><div class="testimonial-pagination"><button type="button" aria-label="Poprzednia rekomendacja" class="testimonial-arrow testimonial-arrow--prev">‹</button><button type="button" aria-label="Następna rekomendacja" class="testimonial-arrow testimonial-arrow--next is-active">›</button></div></div>
+    </div><div class="testimonial-pagination">
+      <button type="button" aria-label="Poprzednia rekomendacja" class="testimonial-arrow testimonial-arrow--prev">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 6 11" fill="none" class="arrow-svg" aria-hidden="true">
+          <path d="M5.39355 10.2573L0.353336 5.21711L5.39355 0.176888" stroke="currentColor" stroke-width="0.5"></path>
+        </svg>
+      </button>
+      <button type="button" aria-label="Następna rekomendacja" class="testimonial-arrow testimonial-arrow--next is-active">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 6 11" fill="none" class="arrow-svg is-right" aria-hidden="true">
+          <path d="M5.39355 10.2573L0.353336 5.21711L5.39355 0.176888" stroke="currentColor" stroke-width="0.5"></path>
+        </svg>
+      </button>
+    </div></div>
     <div class="flex-vertical-center-top gap-4"><div class="rectangle"></div><div class="text-caption text-style-uppercase font-align-center">Development,<br />integracje i wdrożenia</div></div>
   </div></div></div>
 </section>
