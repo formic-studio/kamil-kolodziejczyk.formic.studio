@@ -36,7 +36,7 @@ export const imageUrl = (image: SanityImage | undefined, width?: number) => {
   return width ? `${url}?w=${width}&auto=format&q=90` : url
 }
 
-export const blurredImageUrl = (image: SanityImage | undefined, width = 1200, blur = 40) => {
+export const blurredImageUrl = (image: SanityImage | undefined, width = 1200, blur = 16) => {
   const url = image?.asset?.url
   if (!url) return ''
   return `${url}?w=${width}&auto=format&q=72&blur=${blur}`

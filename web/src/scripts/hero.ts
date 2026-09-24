@@ -58,7 +58,7 @@ export function initHero(lenis: Lenis | null, onReady: () => void) {
   tl.to(rectangles, {opacity: 1, scale: 1, duration: mobile ? .35 : .6, stagger: mobile ? .05 : .18, ease: 'power2.out'}, 0);
   if (!mobile) {
     tl.to(imageStage, {x: 0, y: 0, scale: 1, duration: 1.6, ease: 'power2.inOut'}, .4)
-      .to(blurredImage, {opacity: 0, duration: 1.15, ease: 'power2.out'}, .4);
+      .to(blurredImage, {opacity: 0, duration: 1.55, ease: 'power1.inOut'}, .4);
   }
   tl.to(caption, {yPercent: 0, opacity: 1, duration: mobile ? .45 : 1, ease: 'power2.out'}, mobile ? .12 : 1.4)
     .to(text, {opacity: 1, filter: 'blur(0px)', duration: mobile ? .45 : 1}, mobile ? .24 : 1.6)
