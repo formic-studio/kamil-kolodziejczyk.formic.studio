@@ -14,7 +14,8 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefin
 <html lang="pl-PL">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta id="browser-theme-color" name="theme-color" content="#fff9f5" />
     <meta name="description" content={settings.description} />
     <meta name="robots" content={isProduction ? 'index,follow' : 'noindex,nofollow'} />
     <meta property="og:type" content="website" />
@@ -49,6 +50,8 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefin
   </head>
   <body class="body">
     <slot />
+    <div class="browser-edge-tint browser-edge-tint--top" aria-hidden="true"></div>
+    <div class="browser-edge-tint browser-edge-tint--bottom" aria-hidden="true"></div>
     <script>
       import '../scripts/main';
     </script>

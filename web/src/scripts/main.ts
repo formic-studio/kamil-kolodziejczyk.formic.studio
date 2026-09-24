@@ -9,8 +9,10 @@ import {initReveals} from './reveals';
 import {initPopup} from './popup';
 import {initForms} from './forms';
 import {initIntroLock} from './intro';
+import {initBrowserChrome} from './browserChrome';
 
 const start = () => {
+  initBrowserChrome();
   const lenis = initSmoothScroll();
   const releaseIntro = initIntroLock(lenis);
   const initContent = () => {
