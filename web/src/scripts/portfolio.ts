@@ -19,6 +19,24 @@ export function initPortfolio() {
     }), {passive: true});
     return;
   }
+
+  const firstBackground = slides[0]?.querySelector<HTMLElement>('.block-bg-orange');
+  if (firstBackground) {
+    gsap.fromTo(firstBackground,
+      {scaleX: 0, transformOrigin: 'center'},
+      {
+        scaleX: 1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: slides[0],
+          start: 'top 55%',
+          end: 'top 10%',
+          scrub: true,
+        },
+      },
+    );
+  }
+
   slides.slice(1).forEach((element) => {
     const previous = element.previousElementSibling;
     const previousOverlay = previous?.querySelector<HTMLElement>('.bg-black');

@@ -32,8 +32,8 @@ html.is-intro-loading, html.is-intro-loading body { overflow: hidden; }
 html.is-intro-loading [animation-rectangle],
 html.is-intro-loading [animation-data="text-hero"],
 html.is-intro-loading [animation-data="button"],
-html.is-intro-loading [animation-data="caption"],
-html.is-intro-loading .nav_fixed { opacity: 0; }
+html.is-intro-loading [animation-data="caption"] { opacity: 0; }
+html.is-intro-loading .nav_fixed { transform: translateY(6rem); }
 html.is-intro-loading .hero-image-stack { opacity: 0; }
 html.is-intro-loading .hero-intro-placeholder {
   z-index: 99;

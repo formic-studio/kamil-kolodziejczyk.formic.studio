@@ -26,7 +26,9 @@ export async function initHero(lenis: Lenis | null, onReady: () => void) {
     await blurredImage.decode().catch(() => undefined);
   }
 
-  gsap.set(nav, {y: '6rem', opacity: 0});
+  // Keep the navigation paintable from the first frame so it cannot become
+  // the delayed LCP element. Only its position participates in the intro.
+  gsap.set(nav, {y: '6rem'});
   gsap.set(rectangles, {opacity: 0, scale: mobile ? 1 : .5, zIndex: 101, transformOrigin: 'center'});
   gsap.set(text, {opacity: 0, filter: mobile ? 'none' : 'blur(5px)'});
   gsap.set(button, {x: 32, opacity: 0});
@@ -75,5 +77,5 @@ export async function initHero(lenis: Lenis | null, onReady: () => void) {
   tl.to(caption, {yPercent: 0, opacity: 1, duration: mobile ? .45 : 1, ease: 'power2.out'}, mobile ? .12 : 1.4)
     .to(text, {opacity: 1, filter: 'blur(0px)', duration: mobile ? .45 : 1}, mobile ? .24 : 1.6)
     .to(button, {x: 0, opacity: 1, duration: mobile ? .5 : 1}, mobile ? .32 : 1.8)
-    .to(nav, {y: 0, opacity: 1, duration: mobile ? .8 : 1}, mobile ? .32 : 2);
+    .to(nav, {y: 0, duration: mobile ? .8 : 1}, mobile ? .32 : 2);
 }
