@@ -75,6 +75,18 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (url.pathname === '/api/contact') return handleContact(request, env);
-    return env.ASSETS.fetch(request);
+    const response = await env.ASSETS.fetch(request);
+
+    // Keep Cloudflare's technical *.pages.dev hostname out of search results.
+    // The production build remains indexable on its canonical custom domain.
+    if (!url.hostname.endsWith('.pages.dev')) return response;
+
+    const headers = new Headers(response.headers);
+    headers.set('X-Robots-Tag', 'noindex, nofollow, noarchive');
+    return new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers,
+    });
   },
 };
