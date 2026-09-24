@@ -6,6 +6,7 @@ export async function initHero(lenis: Lenis | null, onReady: () => void) {
   const heroImg = document.querySelector(mobile ? '.img-hero.is-mobile' : '.img-hero:not(.is-mobile):not(.img-hero-blur)');
   const imageStage = mobile ? heroImg : document.querySelector('.hero-image-stack');
   const blurredImage = document.querySelector('.img-hero-blur');
+  const introPlaceholder = document.querySelector('.hero-intro-placeholder');
   const text = document.querySelector('[animation-data="text-hero"]');
   const button = document.querySelector('[animation-data="button"]');
   const caption = document.querySelector('[animation-data="caption"]');
@@ -51,6 +52,10 @@ export async function initHero(lenis: Lenis | null, onReady: () => void) {
       willChange: 'transform',
     });
     gsap.set(blurredImage, {opacity: 1});
+    // The animated stack now shows the same blurred frame at fullscreen size.
+    // Remove the initial LCP layer before the stack starts shrinking so the
+    // two copies can never become visible at the same time.
+    gsap.set(introPlaceholder, {display: 'none'});
   } else {
     gsap.set(heroImg, {scale: 1, opacity: 1, zIndex: 100});
   }
