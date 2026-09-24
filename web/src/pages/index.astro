@@ -16,7 +16,7 @@ data.page.experience = (data.page.experience || []).filter(Boolean);
 data.page.testimonials = (data.page.testimonials || []).filter(Boolean);
 const dataset = import.meta.env.PUBLIC_SANITY_DATASET || 'staging';
 ---
-<BaseLayout settings={data.settings} isProduction={dataset === 'production'}>
+<BaseLayout settings={data.settings} isProduction={dataset === 'production'} mobileLcpImage={data.page.heroImageMobile}>
   <div class="page-wrapper">
     <Navigation />
     <main class="main-wrapper">

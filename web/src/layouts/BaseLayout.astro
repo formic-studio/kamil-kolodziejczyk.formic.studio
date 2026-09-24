@@ -3,11 +3,11 @@ import '../styles/legacy/normalize.css';
 import '../styles/legacy/webflow.css';
 import '../styles/legacy/site.css';
 import '../styles/global.css';
-import type {SiteSettings} from '../lib/content';
+import type {SanityImage, SiteSettings} from '../lib/content';
 import {imageUrl} from '../lib/content';
 
-interface Props { settings: SiteSettings; isProduction: boolean }
-const {settings, isProduction} = Astro.props;
+interface Props { settings: SiteSettings; isProduction: boolean; mobileLcpImage?: SanityImage }
+const {settings, isProduction, mobileLcpImage} = Astro.props;
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefined;
 ---
 <!doctype html>
@@ -27,6 +27,15 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefin
     <meta name="twitter:image" content={imageUrl(settings.ogImage)} />
     {canonical && <link rel="canonical" href={canonical} />}
     <link rel="preconnect" href="https://cdn.sanity.io" crossorigin="anonymous" />
+    {mobileLcpImage?.asset?.url && <link
+      rel="preload"
+      as="image"
+      href={imageUrl(mobileLcpImage, 800)}
+      imagesrcset={`${imageUrl(mobileLcpImage, 500)} 500w, ${imageUrl(mobileLcpImage, 800)} 800w`}
+      imagesizes="(max-width: 479px) 50vw, 56vw"
+      media="(max-width: 767px)"
+      fetchpriority="high"
+    />}
     <link rel="icon" href="/images/favicon.png" />
     <link rel="apple-touch-icon" href="/images/webclip.png" />
     <title>{settings.title}</title>

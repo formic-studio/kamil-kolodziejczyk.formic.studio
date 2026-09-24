@@ -3,6 +3,7 @@ import type {HomePage} from '../lib/content';
 import {blurredImageUrl, imageUrl} from '../lib/content';
 const {page} = Astro.props as {page: HomePage};
 ---
+<img src={blurredImageUrl(page.heroImage)} width="1200" height="450" loading="eager" fetchpriority="high" alt="" aria-hidden="true" class="hero-intro-placeholder" />
 <section id="section_hero" class="section_hero">
   <div class="padding-global padding-section-medium _100"><div class="container-large _100">
     <div class="rectangle-wrapper">
