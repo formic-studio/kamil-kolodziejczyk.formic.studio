@@ -1,7 +1,7 @@
 import type Lenis from 'lenis';
 import {gsap, isMobile, reducedMotion} from './core';
 
-export function initHero(lenis: Lenis | null, onReady: () => void) {
+export async function initHero(lenis: Lenis | null, onReady: () => void) {
   const mobile = isMobile();
   const heroImg = document.querySelector(mobile ? '.img-hero.is-mobile' : '.img-hero:not(.is-mobile):not(.img-hero-blur)');
   const imageStage = mobile ? heroImg : document.querySelector('.hero-image-stack');
@@ -18,6 +18,13 @@ export function initHero(lenis: Lenis | null, onReady: () => void) {
     onReady();
     return;
   }
+
+  // Keep the image stack hidden until the initial blurred frame is decoded.
+  // Otherwise the sharp image can flash briefly on a cold page load.
+  if (!mobile && blurredImage instanceof HTMLImageElement) {
+    await blurredImage.decode().catch(() => undefined);
+  }
+
   gsap.set(nav, {y: '6rem', opacity: 0});
   gsap.set(rectangles, {opacity: 0, scale: mobile ? 1 : .5, zIndex: 101, transformOrigin: 'center'});
   gsap.set(text, {opacity: 0, filter: mobile ? 'none' : 'blur(5px)'});

@@ -17,7 +17,7 @@ const {page} = Astro.props as {page: HomePage};
       </div></div>
       <div class="hero-image-stack">
         <img src={imageUrl(page.heroImage, 1600)} srcset={`${imageUrl(page.heroImage, 500)} 500w, ${imageUrl(page.heroImage, 800)} 800w, ${imageUrl(page.heroImage, 1080)} 1080w, ${imageUrl(page.heroImage, 1600)} 1600w, ${imageUrl(page.heroImage, 2400)} 2400w`} sizes="100vw" width="3456" height="1296" loading="eager" fetchpriority="high" alt={page.heroImage.alt || ''} class="img-hero" />
-        <img src={blurredImageUrl(page.heroImage)} width="1200" height="450" loading="eager" alt="" aria-hidden="true" class="img-hero img-hero-blur" />
+        <img src={blurredImageUrl(page.heroImage)} width="1200" height="450" loading="eager" fetchpriority="high" alt="" aria-hidden="true" class="img-hero img-hero-blur" />
       </div>
       <img src={imageUrl(page.heroImageMobile, 800)} width="800" height="1000" loading="eager" alt={page.heroImageMobile.alt || ''} class="img-hero is-mobile" />
       <div animation-data="caption" class="flex-vertical-center-top gap-2-5"><div class="text-caption text-style-uppercase font-color-tertiary preserve-lines">{page.heroCaption}</div><div class="rectangle"></div></div>
