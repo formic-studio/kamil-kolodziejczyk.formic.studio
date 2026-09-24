@@ -37,10 +37,13 @@ export async function initHero(lenis: Lenis | null, onReady: () => void) {
     const bounds = imageStage.getBoundingClientRect();
     const x = window.innerWidth / 2 - (bounds.left + bounds.width / 2);
     const y = window.innerHeight / 2 - (bounds.top + bounds.height / 2);
+    // Match the placeholder's `object-fit: cover` framing exactly. The old
+    // hard minimum (2.12) briefly zoomed the real image when the two layers
+    // were swapped, before the shrink animation had even started.
+    const overscan = 2;
     const scale = Math.max(
-      2.12,
-      (window.innerWidth + 16) / Math.max(bounds.width, 1),
-      (window.innerHeight + 16) / Math.max(bounds.height, 1),
+      (window.innerWidth + overscan) / Math.max(bounds.width, 1),
+      (window.innerHeight + overscan) / Math.max(bounds.height, 1),
     );
 
     gsap.set(imageStage, {
