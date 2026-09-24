@@ -81,6 +81,29 @@ button.slider-text {
 button.slider-text:focus:not(:focus-visible) { outline: none; }
 button.slider-text:focus-visible { outline: 1px solid currentColor; outline-offset: 4px; }
 
+/* Portfolio dots are buttons for accessibility. Mobile browsers otherwise add
+   native inline padding, turning the original 8x8 circles into pills. */
+button.paggination {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: 0 0 8px;
+  width: 8px;
+  min-width: 8px;
+  height: 8px;
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+  background-color: transparent;
+  line-height: 0;
+}
+
+button.paggination.active {
+  background-color: var(--base-color-neutral--white-opacity);
+}
+
+button.paggination:focus:not(:focus-visible) { outline: none; }
+button.paggination:focus-visible { outline: 1px solid currentColor; outline-offset: 3px; }
+
 /* Keep the contact modal compact while preserving its original right-hand
    position. The CMS heading has no forced line break, so the panel needs an
    explicit width instead of relying on its intrinsic content width. */
