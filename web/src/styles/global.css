@@ -181,11 +181,12 @@ html { font-size: calc(var(--base) * 1rem + var(--coefficient) * 1vw); }
 @media (max-width: 768px) { :root { --font-from: 14; --font-to: 16; --vw-from: calc(479 / 100); --vw-to: calc(768 / 100); } }
 @media (max-width: 767px) { .hide-mobile-landscape { display: none !important; } }
 @media (max-width: 767px) {
-  /* Safari 26 samples the page behind its translucent browser chrome. Keep
-     the document canvas transparent so the current section can show through
-     instead of forcing one light body color across the whole page. */
+  /* The browser canvas is visible below the document during Safari's dynamic
+     toolbar and rubber-band states. Match it to the final section so Safari
+     never exposes a white void beneath the black footer. */
   html,
-  body.body { background-color: transparent; }
+  body.body,
+  .page-wrapper { background-color: var(--base-color-neutral--black); }
   .hero-intro-placeholder { display: none !important; }
   .hero-image-stack { display: none; }
   .hero-mobile-picture {
