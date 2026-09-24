@@ -77,7 +77,13 @@ html.is-intro-loading .hero-intro-placeholder {
 .form-field { background-image: linear-gradient(var(--background-color--bacground-span), var(--background-color--bacground-span)); background-repeat: no-repeat; background-position: left center; background-size: 0 100%; }
 .preserve-lines { white-space: pre-line; }
 .social-link-label { display: grid; place-items: center; width: 100%; height: 100%; font-family: var(--space-mono); font-size: .55rem; text-transform: uppercase; }
-.form-status { display: none; }
+.form-status {
+  display: none;
+  box-sizing: border-box;
+  width: 100%;
+  padding-top: 2.4rem;
+  text-align: center;
+}
 .form-status.is-visible { display: block; }
 .contact-honeypot { position: absolute !important; left: -10000px !important; width: 1px !important; height: 1px !important; overflow: hidden !important; }
 .form-button:disabled { cursor: wait; opacity: .65; }
