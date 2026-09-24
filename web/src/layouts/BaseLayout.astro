@@ -29,6 +29,13 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefin
     <link rel="icon" href="/images/favicon.png" />
     <link rel="apple-touch-icon" href="/images/webclip.png" />
     <title>{settings.title}</title>
+    <script is:inline>
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      window.scrollTo(0, 0);
+      if (!window.matchMedia('(max-width: 767px)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('is-intro-loading');
+      }
+    </script>
   </head>
   <body class="body">
     <slot />

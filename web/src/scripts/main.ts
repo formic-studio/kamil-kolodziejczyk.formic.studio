@@ -8,10 +8,13 @@ import {initTestimonials} from './testimonials';
 import {initReveals} from './reveals';
 import {initPopup} from './popup';
 import {initForms} from './forms';
+import {initIntroLock} from './intro';
 
 const start = () => {
   const lenis = initSmoothScroll();
+  const releaseIntro = initIntroLock(lenis);
   const initContent = () => {
+    releaseIntro();
     initNavigation(lenis); initPortfolio(); initSliders(); initTestimonials(); initReveals(); initPopup(lenis); initForms();
     ScrollTrigger.refresh();
   };

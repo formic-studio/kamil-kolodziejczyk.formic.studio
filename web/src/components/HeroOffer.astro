@@ -15,7 +15,7 @@ const {page} = Astro.props as {page: HomePage};
         <div id="w-node-_8e23c23c-8602-021f-2197-906c4058e766-bb3bdf83" animation-data="text-hero" class="heading-style-h3 text-align-center preserve-lines">{page.heroEyebrow}</div>
         <div animation-data="button" class="link-block-wrapper mobile-display-none"><button type="button" data-popup="open" class="button-block hero-cta"><span class="button-bg-orange"></span><span class="text-button">{page.heroCta}</span></button></div>
       </div></div>
-      <img src={imageUrl(page.heroImage, 1600)} srcset={`${imageUrl(page.heroImage, 500)} 500w, ${imageUrl(page.heroImage, 800)} 800w, ${imageUrl(page.heroImage, 1080)} 1080w, ${imageUrl(page.heroImage, 1600)} 1600w, ${imageUrl(page.heroImage, 2400)} 2400w`} sizes="100vw" width="3456" height="1895" loading="eager" fetchpriority="high" alt={page.heroImage.alt || ''} class="img-hero" />
+      <img src={imageUrl(page.heroImage, 1600)} srcset={`${imageUrl(page.heroImage, 500)} 500w, ${imageUrl(page.heroImage, 800)} 800w, ${imageUrl(page.heroImage, 1080)} 1080w, ${imageUrl(page.heroImage, 1600)} 1600w, ${imageUrl(page.heroImage, 2400)} 2400w`} sizes="100vw" width="3456" height="1296" loading="eager" fetchpriority="high" alt={page.heroImage.alt || ''} class="img-hero" />
       <img src={imageUrl(page.heroImageMobile, 800)} width="800" height="1000" loading="eager" alt={page.heroImageMobile.alt || ''} class="img-hero is-mobile" />
       <div animation-data="caption" class="flex-vertical-center-top gap-2-5"><div class="text-caption text-style-uppercase font-color-tertiary preserve-lines">{page.heroCaption}</div><div class="rectangle"></div></div>
     </div>

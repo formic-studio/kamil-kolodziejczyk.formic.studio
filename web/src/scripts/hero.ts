@@ -17,14 +17,14 @@ export function initHero(lenis: Lenis | null, onReady: () => void) {
     return;
   }
   gsap.set(nav, {y: '6rem', opacity: 0});
-  gsap.set(rectangles, {opacity: 0, scale: mobile ? 1 : .5, transformOrigin: 'center'});
+  gsap.set(rectangles, {opacity: 0, scale: mobile ? 1 : .5, zIndex: 101, transformOrigin: 'center'});
   gsap.set(text, {opacity: 0, filter: mobile ? 'none' : 'blur(5px)'});
   gsap.set(button, {x: 32, opacity: 0});
   gsap.set(caption, {yPercent: -18, opacity: 0});
-  if (!mobile) gsap.set(heroImg, {scale: 2, filter: 'blur(5px)', transformOrigin: 'center'});
-  else gsap.set(heroImg, {scale: 1, opacity: 1});
+  if (!mobile) gsap.set(heroImg, {scale: 2.12, filter: 'blur(5px)', zIndex: 100, transformOrigin: 'center center'});
+  else gsap.set(heroImg, {scale: 1, opacity: 1, zIndex: 100});
 
-  const tl = gsap.timeline({delay: mobile ? .08 : .3, onComplete: () => {lenis?.start(); onReady();}});
+  const tl = gsap.timeline({delay: mobile ? .08 : .3, onComplete: onReady});
   tl.to(rectangles, {opacity: 1, scale: 1, duration: mobile ? .35 : .6, stagger: mobile ? .05 : .18, ease: 'power2.out'}, 0);
   if (!mobile) tl.to(heroImg, {scale: 1, filter: 'blur(0px)', duration: 1.6, ease: 'power2.inOut'}, .4);
   tl.to(caption, {yPercent: 0, opacity: 1, duration: mobile ? .45 : 1, ease: 'power2.out'}, mobile ? .12 : 1.4)
