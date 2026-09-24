@@ -3,7 +3,9 @@ import {gsap, isMobile, reducedMotion} from './core';
 
 export function initHero(lenis: Lenis | null, onReady: () => void) {
   const mobile = isMobile();
-  const heroImg = document.querySelector(mobile ? '.img-hero.is-mobile' : '.img-hero:not(.is-mobile)');
+  const heroImg = document.querySelector(mobile ? '.img-hero.is-mobile' : '.img-hero:not(.is-mobile):not(.img-hero-blur)');
+  const imageStage = mobile ? heroImg : document.querySelector('.hero-image-stack');
+  const blurredImage = document.querySelector('.img-hero-blur');
   const text = document.querySelector('[animation-data="text-hero"]');
   const button = document.querySelector('[animation-data="button"]');
   const caption = document.querySelector('[animation-data="caption"]');
@@ -11,7 +13,7 @@ export function initHero(lenis: Lenis | null, onReady: () => void) {
   const rectangles = gsap.utils.toArray<HTMLElement>('[animation-rectangle]').sort((a, b) => Number(a.getAttribute('animation-rectangle')) - Number(b.getAttribute('animation-rectangle')));
 
   if (reducedMotion()) {
-    const targets = [heroImg, text, button, caption, nav, ...rectangles].filter(Boolean);
+    const targets = [imageStage, heroImg, blurredImage, text, button, caption, nav, ...rectangles].filter(Boolean);
     gsap.set(targets, {clearProps: 'all'});
     onReady();
     return;
@@ -21,12 +23,43 @@ export function initHero(lenis: Lenis | null, onReady: () => void) {
   gsap.set(text, {opacity: 0, filter: mobile ? 'none' : 'blur(5px)'});
   gsap.set(button, {x: 32, opacity: 0});
   gsap.set(caption, {yPercent: -18, opacity: 0});
-  if (!mobile) gsap.set(heroImg, {scale: 2.12, filter: 'blur(5px)', zIndex: 100, transformOrigin: 'center center'});
-  else gsap.set(heroImg, {scale: 1, opacity: 1, zIndex: 100});
+  if (!mobile && imageStage instanceof HTMLElement) {
+    const bounds = imageStage.getBoundingClientRect();
+    const x = window.innerWidth / 2 - (bounds.left + bounds.width / 2);
+    const y = window.innerHeight / 2 - (bounds.top + bounds.height / 2);
+    const scale = Math.max(
+      2.12,
+      (window.innerWidth + 16) / Math.max(bounds.width, 1),
+      (window.innerHeight + 16) / Math.max(bounds.height, 1),
+    );
 
-  const tl = gsap.timeline({delay: mobile ? .08 : .3, onComplete: onReady});
+    gsap.set(imageStage, {
+      x,
+      y,
+      scale,
+      opacity: 1,
+      zIndex: 100,
+      force3D: true,
+      transformOrigin: 'center center',
+      willChange: 'transform',
+    });
+    gsap.set(blurredImage, {opacity: 1});
+  } else {
+    gsap.set(heroImg, {scale: 1, opacity: 1, zIndex: 100});
+  }
+
+  const tl = gsap.timeline({
+    delay: mobile ? .08 : .3,
+    onComplete: () => {
+      if (imageStage) gsap.set(imageStage, {willChange: 'auto'});
+      onReady();
+    },
+  });
   tl.to(rectangles, {opacity: 1, scale: 1, duration: mobile ? .35 : .6, stagger: mobile ? .05 : .18, ease: 'power2.out'}, 0);
-  if (!mobile) tl.to(heroImg, {scale: 1, filter: 'blur(0px)', duration: 1.6, ease: 'power2.inOut'}, .4);
+  if (!mobile) {
+    tl.to(imageStage, {x: 0, y: 0, scale: 1, duration: 1.6, ease: 'power2.inOut'}, .4)
+      .to(blurredImage, {opacity: 0, duration: 1.15, ease: 'power2.out'}, .4);
+  }
   tl.to(caption, {yPercent: 0, opacity: 1, duration: mobile ? .45 : 1, ease: 'power2.out'}, mobile ? .12 : 1.4)
     .to(text, {opacity: 1, filter: 'blur(0px)', duration: mobile ? .45 : 1}, mobile ? .24 : 1.6)
     .to(button, {x: 0, opacity: 1, duration: mobile ? .5 : 1}, mobile ? .32 : 1.8)

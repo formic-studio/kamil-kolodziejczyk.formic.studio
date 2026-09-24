@@ -21,18 +21,14 @@ export function initIntroLock(lenis: Lenis | null) {
     event.preventDefault();
   };
 
-  const keepAtTop = () => {
-    if (!running) return;
-    if (!document.hidden) {
-      window.scrollTo(0, 0);
-      lenis?.scrollTo(0, {immediate: true});
-    }
-    requestAnimationFrame(keepAtTop);
-  };
-
   window.addEventListener('wheel', preventScroll, {passive: false});
   window.addEventListener('touchmove', preventScroll, {passive: false});
-  requestAnimationFrame(keepAtTop);
+  const keepAtTopOnce = () => {
+    if (!running) return;
+    window.scrollTo(0, 0);
+    lenis?.scrollTo(0, {immediate: true});
+  };
+  window.addEventListener('load', keepAtTopOnce, {once: true});
 
   let safetyTimer = 0;
   const release = () => {
@@ -41,6 +37,7 @@ export function initIntroLock(lenis: Lenis | null) {
     window.clearTimeout(safetyTimer);
     window.removeEventListener('wheel', preventScroll);
     window.removeEventListener('touchmove', preventScroll);
+    window.removeEventListener('load', keepAtTopOnce);
     document.documentElement.classList.remove('is-intro-loading');
     window.scrollTo(0, 0);
     lenis?.scrollTo(0, {immediate: true});
