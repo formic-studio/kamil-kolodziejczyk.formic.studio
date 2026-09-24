@@ -14,6 +14,7 @@ export async function initHero(lenis: Lenis | null, onReady: () => void) {
   const rectangles = gsap.utils.toArray<HTMLElement>('[animation-rectangle]').sort((a, b) => Number(a.getAttribute('animation-rectangle')) - Number(b.getAttribute('animation-rectangle')));
 
   if (reducedMotion()) {
+    nav?.classList.remove('nav-intro-pending');
     const targets = [imageStage, heroImg, blurredImage, text, button, caption, nav, ...rectangles].filter(Boolean);
     gsap.set(targets, {clearProps: 'all'});
     onReady();
@@ -26,9 +27,14 @@ export async function initHero(lenis: Lenis | null, onReady: () => void) {
     await blurredImage.decode().catch(() => undefined);
   }
 
-  // Keep the navigation paintable from the first frame so it cannot become
-  // the delayed LCP element. Only its position participates in the intro.
-  gsap.set(nav, {y: '6rem'});
+  // Keep the navigation paintable for LCP, but place the whole bar below the
+  // viewport until its reveal. Its desktop bottom offset alone is 9rem, so a
+  // fixed 6rem translation left the navigation visible during the intro.
+  if (nav instanceof HTMLElement) {
+    const bottomOffset = Number.parseFloat(getComputedStyle(nav).bottom) || 0;
+    gsap.set(nav, {y: nav.offsetHeight + bottomOffset + 16});
+    nav.classList.remove('nav-intro-pending');
+  }
   gsap.set(rectangles, {opacity: 0, scale: mobile ? 1 : .5, zIndex: 101, transformOrigin: 'center'});
   gsap.set(text, {opacity: 0, filter: mobile ? 'none' : 'blur(5px)'});
   gsap.set(button, {x: 32, opacity: 0});
