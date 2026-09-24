@@ -26,6 +26,7 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefin
     <meta name="twitter:description" content={settings.description} />
     <meta name="twitter:image" content={imageUrl(settings.ogImage)} />
     {canonical && <link rel="canonical" href={canonical} />}
+    <link rel="preconnect" href="https://cdn.sanity.io" crossorigin="anonymous" />
     <link rel="icon" href="/images/favicon.png" />
     <link rel="apple-touch-icon" href="/images/webclip.png" />
     <title>{settings.title}</title>

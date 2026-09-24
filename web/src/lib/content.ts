@@ -30,10 +30,10 @@ export const pageQuery = `{
   }
 }`
 
-export const imageUrl = (image: SanityImage | undefined, width?: number) => {
+export const imageUrl = (image: SanityImage | undefined, width?: number, quality = 90) => {
   const url = image?.asset?.url
   if (!url) return ''
-  return width ? `${url}?w=${width}&auto=format&q=90` : url
+  return width ? `${url}?w=${width}&auto=format&q=${quality}` : url
 }
 
 export const blurredImageUrl = (image: SanityImage | undefined, width = 1200, blur = 10) => {

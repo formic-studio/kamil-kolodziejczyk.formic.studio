@@ -1,4 +1,4 @@
-import {gsap, ScrollTrigger, isMobile, throttleRaf} from './core';
+import {gsap, isMobile, throttleRaf} from './core';
 
 export function initPortfolio() {
   const wrapper = document.querySelector<HTMLElement>('.portfolio-wrapper');
@@ -21,12 +21,25 @@ export function initPortfolio() {
   }
   slides.slice(1).forEach((element) => {
     const previous = element.previousElementSibling;
-    const tl = gsap.timeline({scrollTrigger: {trigger: element, start: 'top bottom', end: 'top 10%', scrub: true}});
-    tl.fromTo(element, {width: '82%'}, {width: '100%', ease: 'none'}, 0)
-      .fromTo(element.querySelector('.caption-wrapper'), {opacity: 0}, {opacity: 1}, .4)
-      .fromTo(element.querySelector('.block-bg-orange'), {scaleX: 0}, {scaleX: 1, transformOrigin: 'center'}, .5)
-      .fromTo(element.querySelectorAll('[data-animation="text"]'), {opacity: 0}, {opacity: 1}, .7);
-    if (previous) tl.fromTo(previous.querySelector('.bg-black'), {backgroundColor: 'rgba(0,0,0,0)'}, {backgroundColor: 'rgba(0,0,0,.75)', ease: 'none'}, 0);
+    const previousOverlay = previous?.querySelector<HTMLElement>('.bg-black');
+    const setCompositingHint = (active: boolean) => {
+      element.style.willChange = active ? 'clip-path' : 'auto';
+      if (previousOverlay) previousOverlay.style.willChange = active ? 'opacity' : 'auto';
+    };
+    const tl = gsap.timeline({scrollTrigger: {
+      trigger: element,
+      start: 'top bottom',
+      end: 'top 10%',
+      scrub: true,
+      onEnter: () => setCompositingHint(true),
+      onEnterBack: () => setCompositingHint(true),
+      onLeave: () => setCompositingHint(false),
+      onLeaveBack: () => setCompositingHint(false),
+    }});
+    tl.fromTo(element, {clipPath: 'inset(0 9%)'}, {clipPath: 'inset(0 0%)', duration: 1, ease: 'none'}, 0)
+      .fromTo(element.querySelector('.caption-wrapper'), {opacity: 0}, {opacity: 1, duration: .5, ease: 'power1.out'}, .4)
+      .fromTo(element.querySelector('.block-bg-orange'), {scaleX: 0}, {scaleX: 1, transformOrigin: 'center', duration: .5, ease: 'power2.inOut'}, .5)
+      .fromTo(element.querySelectorAll('[data-animation="text"]'), {opacity: 0}, {opacity: 1, duration: .3, ease: 'none'}, .7);
+    if (previousOverlay) tl.fromTo(previousOverlay, {opacity: 0}, {opacity: .75, duration: 1, ease: 'none'}, 0);
   });
-  ScrollTrigger.refresh();
 }
