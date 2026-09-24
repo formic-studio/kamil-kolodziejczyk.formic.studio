@@ -39,6 +39,7 @@ html.is-intro-loading .hero-image-stack { opacity: 0; }
 .slider-block .divider, .slider-block-services .divider { transform: scaleX(0); transform-origin: left; }
 .slider-inner { transition: transform .6s cubic-bezier(.77, 0, .18, 1); }
 .link-block > div:not(.nav-bg) { position: relative; z-index: 1; }
+.link-block.link-bg-color .nav-bg { opacity: 1; }
 .svg-link-top > svg {
   display: block;
 }
