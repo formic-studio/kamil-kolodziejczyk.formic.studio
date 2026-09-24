@@ -8,6 +8,11 @@ const env = loadEnv(process.env.NODE_ENV || 'development', process.cwd(), '');
 // https://astro.build/config
 export default defineConfig({
 	site: env.PUBLIC_SITE_URL || 'https://kamil-kolodziejczyk.formic.studio',
+	build: {
+		// This is a single-page site and its compressed stylesheet is small.
+		// Inlining it removes a render-blocking request from the critical path.
+		inlineStylesheets: 'always',
+	},
 	integrations: [
 		sanity({
 			projectId: env.PUBLIC_SANITY_PROJECT_ID || 'qus38rw8',
