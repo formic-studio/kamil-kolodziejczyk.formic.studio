@@ -185,7 +185,10 @@ html { font-size: calc(var(--base) * 1rem + var(--coefficient) * 1vw); }
      toolbar and rubber-band states. Match it to the final section so Safari
      never exposes a white void beneath the black footer. */
   html,
-  body.body,
+  body.body {
+    background-color: var(--base-color-neutral--black);
+    overscroll-behavior-y: none;
+  }
   .page-wrapper { background-color: var(--base-color-neutral--black); }
   .hero-intro-placeholder { display: none !important; }
   .hero-image-stack { display: none; }
